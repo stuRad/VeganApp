@@ -1,5 +1,4 @@
 
-//const {ethers} = require("hardhat");
 const {uploader} = require("../ipfs/upload.js");
 const {deployer} = require("./deploy.js");
 
@@ -17,7 +16,6 @@ async function main() {
 
 
   const ipfsUpload = await uploader();
-  //for(let i = 0; i < friends.length; i++) {
     const tokenURI = "https://gateway.ipfs.io/ipfs/" + ipfsUpload.path;
     console.log(tokenURI);
     await nft.awardItem(myAddress, tokenURI);
