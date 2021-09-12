@@ -8,7 +8,11 @@ const myAddress = "0x6368CD30cc23277CF1886841E138e864e11d1981";
 
 
 async function main() {
-  const existingContractAddr = await deployer();
+  //const existingContractAddr = await deployer();
+
+  //Run scripts/deploy.js then paste the address here
+  const existingContractAddr = "";
+
   const nft = await ethers.getContractAt("AnimalNFT", existingContractAddr);
 
   const signer0 = await ethers.provider.getSigner(0);
@@ -16,10 +20,9 @@ async function main() {
 
 
   const ipfsUpload = await uploader();
-    const tokenURI = "https://gateway.ipfs.io/ipfs/" + ipfsUpload.path;
-    console.log(tokenURI);
-    await nft.awardItem(myAddress, tokenURI);
-
+  const tokenURI = "https://gateway.ipfs.io/ipfs/" + ipfsUpload.path;
+  console.log(tokenURI);
+  await nft.awardItem(myAddress, tokenURI);
 
   console.log("Minting is complete!");
 
