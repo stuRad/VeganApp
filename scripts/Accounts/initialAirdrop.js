@@ -4,27 +4,22 @@ const { create } = require('ipfs-http-client');
 const {uploader} = require("../../ipfs/upload.js");
 const {VEGGIECOINS, NFTS} = require("../ADDRESSES.js");
 
-const client = create();
-
-
 async function airdrop() {
+
+  //ESTABLISH REFERENCES TO TOKEN AND NFT CONTRACTS
   const token = await ethers.getContractAt("VeggieCoins", VEGGIECOINS);
   const nft = await ethers.getContractAt("AnimalNFT", NFTS);
 
   const nowDate = new Date();
   const start = address.veganniversary;
-
-  console.log(`Initial Airdrop for account: ${address.address}`);
-
   let daysVegan = Math.floor((nowDate.getTime() - start.getTime()) / (1000 * 3600 * 24));
   let monthsVegan = Math.max((nowDate.getFullYear() - start.getFullYear()) * 12 + nowDate.getMonth() - start.getMonth(), 0);
 
-  //await token.transfer(address.address, ethers.utils.parseEther(daysVegan.toString()));
+  console.log(`Starting Airdrop for new User: ${address.address}`);
 
+  //MINT THE USER TOKENS BASED ON HOW LONG BEEN VEGAN (daysVegan)
   await token.airdropMint(address.address, ethers.utils.parseEther(daysVegan.toString()));
-
-  console.log(`Token airdrop for address ${address.address} on contract ${VEGGIECOINS} is complete!`);
-
+  console.log(`Airdrop complete!`);
 
   //NFT STUFF
   //Go to https://rinkeby.etherscan.io/address/ existingNFTContractAddr
@@ -32,6 +27,7 @@ async function airdrop() {
   for (i = 0; i < monthsVegan; i++) {
     const ipfsUpload = await uploader();
     const tokenURI = "https://gateway.ipfs.io/ipfs/" + ipfsUpload.path;
+    //MINT RANDOM NFT TO USER
     await nft.awardItem(address.address, tokenURI);
     console.log(tokenURI);
     console.log(`Minting ${i+1} is complete!`);
