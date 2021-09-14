@@ -3,11 +3,14 @@ const template = ({ address, balance }) => `
     Address: ${address}
   </div>
   <div class="balance">
-    Balance: ${balance}
+    VeggieTokenBalance: ${balance}
   </div>
   <div class="logout" id="logout">
     Logout
   </div>
+  <div class="NFTs">
+    NFT:
+      </div>
 `;
 
 export default (templateVars, logoutHandler) => {
