@@ -13,8 +13,10 @@
     "@openzeppelin/contracts": "^4.3.0",
     "@portis/web3": "^4.0.5",
     "dotenv": "^10.0.0",
+    "etherscan-api": "^10.0.5",
     "hardhat": "^2.6.0",
     "ipfs-http-client": "^52.0.1",
+    "mocha": "^9.1.1",
     "web3modal": "^1.9.4"
   },
   "devDependencies": {

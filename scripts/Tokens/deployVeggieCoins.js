@@ -1,6 +1,7 @@
 async function tokenDeployer() {
   //const initialSupply = ethers.utils.parseEther("10000000");
   const VeggieCoins = await hre.ethers.getContractFactory("VeggieCoins");
+
   const token = await VeggieCoins.deploy();
 
   await token.deployed();
