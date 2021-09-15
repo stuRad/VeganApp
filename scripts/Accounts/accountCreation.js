@@ -45,8 +45,4 @@ function randomDate(start, end) {
   return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
-
-const a = createRandomAccount();
-console.log(a);
-
-module.exports = {createMyAccount, createAccountWithParams}
+module.exports = {createMyAccount, createRandomAccount, createAccountWithParams}
