@@ -32,9 +32,9 @@ function createRandomAccount() {
   };
 }
 
-function createAccountWithParams(veganniversaryDate, accountCreatedDate, lastLoginDate) {
+function createAccountWithParams(address, veganniversaryDate, accountCreatedDate, lastLoginDate = new Date()) {
   return {
-    address: ethers.Wallet.createRandom().address,
+    address: address,
     veganniversary: new Date(veganniversaryDate),
     accountCreated: new Date(accountCreatedDate),
     lastLogin: new Date(lastLoginDate)
