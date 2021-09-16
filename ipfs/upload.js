@@ -14,8 +14,6 @@ async function uploader() {
   }];
 
   const result = await ipfs.add(files);
-
-  //console.log(result);
   return result;
 }
 

@@ -1,16 +1,3 @@
-//let wallets = [];
-//let addresses = [];
-
-// for (i = 0; i < 5; i++) {
-//   wallets.push(ethers.Wallet.createRandom());
-//   addresses.push({address: wallets[i].address, veganniversary: new Date(2021, 3, 15)});
-// }
-
-//wallets.push(ethers.Wallet.createRandom());
-//addresses.push({address: wallets.address, veganniversary: new Date(2021, 3, 15)});
-
-//console.log(addresses);
-
 function createMyAccount() {
   return {
     address: "0x6368CD30cc23277CF1886841E138e864e11d1981",

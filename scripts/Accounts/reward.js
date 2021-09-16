@@ -1,9 +1,9 @@
-const {address} = require("./accountCreation");
+//const {address} = require("./accountCreation");
 const { create } = require('ipfs-http-client');
 const {uploader} = require("../../ipfs/upload.js");
 const {VEGGIECOINS, NFTS} = require("../ADDRESSES.js");
 
-async function handleReward() {
+async function handleReward(address) {
 
   const token = await hre.ethers.getContractAt("VeggieCoins", VEGGIECOINS);
   const nft = await ethers.getContractAt("AnimalNFT", NFTS);
@@ -16,6 +16,7 @@ async function handleReward() {
 
   //Give a token for each day since last login
   console.log(`Starting reward mint for user: ${address.address}`);
+  console.log(`Minting ${daysSinceLastLogin} VGN tokens`);
   await token.airdropMint(address.address, ethers.utils.parseEther(daysSinceLastLogin.toString()));
   console.log(`Mint Complete!`);
 
@@ -35,4 +36,4 @@ async function handleReward() {
 
 }
 
-handleReward();
+module.exports = {handleReward}

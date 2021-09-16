@@ -1,5 +1,3 @@
-
-
 const AnimalChoices = {
   COW: [
     "https://scontent-lga3-1.xx.fbcdn.net/v/t1.15752-9/241447707_362771528874610_2591930683245878997_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=ae9488&_nc_ohc=47N4UKivBpcAX8-_H6k&tn=Hix1CUouOBL005QI&_nc_ht=scontent-lga3-1.xx&oh=012cb0b855e4be959c1f29835cdc02e3&oe=61624E30",
@@ -36,7 +34,6 @@ function serveAnimal() {
     const i = Math.floor(Math.random() * 4);
 
     switch(i) {
-
       case 0:
       const cowChoice = Math.floor(Math.random() * 3);
         return({
@@ -75,7 +72,4 @@ function serveAnimal() {
     }
 }
 
-//serveAnimal();
-
 module.exports = {serveAnimal};
-//export {serveAnimal};
