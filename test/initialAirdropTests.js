@@ -80,86 +80,57 @@ describe("Reward", () => {
        var today = new Date();
        var yesterday = new Date(today);
        yesterday.setDate(yesterday.getDate()-1);
-       console.log(today);
-       console.log(yesterday);
 
-      //need to update these dates to be yesterday
       var userOneDay = {
        address: ethers.Wallet.createRandom().address,
        veganniversary: new Date(yesterday),
        accountCreated: new Date(yesterday),
        lastLogin: new Date(yesterday)
      };
+      var daysSinceLastLogin = Math.floor((today.getTime() - userOneDay.lastLogin.getTime()) / (1000 * 3600 * 24));
+      await handleReward(userOneDay);
+      const userAddress = userOneDay.address;
+      //give etherscan time to see + track the transction
 
-    var daysSinceLastLogin = Math.floor((today.getTime() - userOneDay.lastLogin.getTime()) / (1000 * 3600 * 24));
-
-
-        await handleReward(userOneDay);
-        const userAddress = userOneDay.address;
-        //give etherscan time to see + track the transction
-
-        await new Promise(function (resolve, reject) {
-          setTimeout(function () {
-            resolve("anything");
-          }, 30000);
-        });
-
-
+      await new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          resolve("anything");
+        }, 30000);
+      });
       const result = await api.account.tokenbalance(userAddress, '', VEGGIECOINS);
-      tokenCount = ethers.utils.formatEther(result.result);
-      console.log(tokencount);
-
-
+      const tokenCount = ethers.utils.formatEther(result.result);
+      //console.log(tokencount);
       assert.equal(tokenCount, daysSinceLastLogin);
-
-
-    })
-
+    }).timeout(35000);
 });
-
 
 describe("Reward 30 days", () => {
     it("should mint 30 tokens to user if it has been a month since last login. - also mints 1 nft" , async () => {
-      //One Day Time in ms(milliseconds)
-       var now = new Date();
-       var day30 = new Date(today);
+          //One Day Time in ms(milliseconds)
+           var now = new Date();
+           var day30 = new Date(now);
+           day30.setDate(day30.getDate()-30);
+           var yesterday = new Date(now);
+           yesterday.setDate(yesterday.getDate()-1);
 
-       day30.setDate(day30.getDate()-30);
-       var yesterday = new Date(now);
-       yesterday.setDate(yesterday.getDate()-1);
-       console.log(now);
-       console.log(day30);
-
-
-      //need to update these dates to be yesterday
-      var userOneDay = {
-       address: ethers.Wallet.createRandom().address,
-       veganniversary: new Date(yesterday),
-       accountCreated: new Date(yesterday),
-       lastLogin: new Date(day30)
-     };
-
-    var daysSinceLastLogin = Math.floor((today.getTime() - userOneDay.lastLogin.getTime()) / (1000 * 3600 * 24));
-
+          var userOneDay = {
+           address: ethers.Wallet.createRandom().address,
+           veganniversary: new Date(yesterday),
+           accountCreated: new Date(yesterday),
+           lastLogin: new Date(day30)
+         };
+        var daysSinceLastLogin = Math.floor((now.getTime() - userOneDay.lastLogin.getTime()) / (1000 * 3600 * 24));
         await handleReward(userOneDay);
-
         //give etherscan time to see + track the transction
-
         await new Promise(function (resolve, reject) {
           setTimeout(function () {
             resolve("anything");
           }, 30000);
         });
-
-
+      const userAddress = userOneDay.address;
       const result = await api.account.tokenbalance(userAddress, '', VEGGIECOINS);
-      tokenCount = ethers.utils.formatEther(result.result);
-      console.log(result);
-
-
+      const tokenCount = ethers.utils.formatEther(result.result);
+      //console.log(result);
       assert.equal(tokenCount, daysSinceLastLogin);
-
-    })
-
+    }).timeout(35000);
 });
-
