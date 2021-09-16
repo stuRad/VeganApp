@@ -16,7 +16,7 @@ async function airdrop(address) {
   let monthsVegan = Math.max((nowDate.getFullYear() - start.getFullYear()) * 12 + nowDate.getMonth() - start.getMonth(), 0);
   //let monthsVegan = Math.floor(daysVegan / 30);
 
-  console.log(`Starting Airdrop of ${daysVegan} VGN for new User: ${address.address}`);
+  console.log(`Starting airdrop of ${daysVegan} VGN tokens for new User: ${address.address}`);
 
   //MINT THE USER TOKENS BASED ON HOW LONG BEEN VEGAN (daysVegan)
   await token.airdropMint(address.address, ethers.utils.parseEther(daysVegan.toString()));
@@ -26,30 +26,18 @@ async function airdrop(address) {
   //NFT STUFF
   //Go to https://rinkeby.etherscan.io/address/ existingNFTContractAddr
   //and look at recent transactions. should see all the new NFTs being awarded to address.address
-  for (i = 0; i < monthsVegan; i++) {
-    const ipfsUpload = await uploader();
-    const tokenURI = "https://gateway.ipfs.io/ipfs/" + ipfsUpload.path;
-    //MINT RANDOM NFT TO USER
-    await nft.awardItem(address.address, tokenURI);
-    console.log(tokenURI);
-    console.log(`Minting ${i+1} is complete!`);
+  if (monthsVegan != 0) {
+    for (i = 0; i < monthsVegan; i++) {
+      const ipfsUpload = await uploader();
+      const tokenURI = "https://gateway.ipfs.io/ipfs/" + ipfsUpload.path;
+      //MINT RANDOM NFT TO USER
+      await nft.awardItem(address.address, tokenURI);
+      console.log(tokenURI);
+      console.log(`Minting ${i+1} is complete!`);
+    }
+    console.log(`${monthsVegan} NFTs have been minted to ${address.address}`);
   }
-  console.log(`All ${monthsVegan} initial NFTs have been minted to ${address.address} on contract ${NFTS}!`);
   return true;
 }
 
 module.exports = {airdrop}
-
-
-// const userOneDay = createAccountWithParams(
-//     MYADDRESS,
-//     "2021, 9, 14",
-//     "2021, 9, 14"
-//   );
-//
-// airdrop(userOneDay)
-//   .then(() => process.exit(0))
-//   .catch((error) => {
-//     console.error(error);
-//     process.exit(1);
-//   });

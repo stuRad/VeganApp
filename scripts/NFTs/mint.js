@@ -1,4 +1,5 @@
-
+//DEFUNCT
+//NOT USED
 const {uploader} = require("../ipfs/upload.js");
 const {deployer} = require("./deployAnimalNFTs.js");
 
@@ -8,9 +9,7 @@ const myAddress = "0x6368CD30cc23277CF1886841E138e864e11d1981";
 
 
 async function main() {
-  //const existingContractAddr = await deployer();
 
-  //Run scripts/deploy.js then paste the address here
   const existingContractAddr = "";
 
   const nft = await ethers.getContractAt("AnimalNFT", existingContractAddr);

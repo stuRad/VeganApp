@@ -21,7 +21,7 @@ describe("Account with 1 day of being vegan", () => {
 
     await airdrop(userOneDay);
     const userAddress = userOneDay.address;
-    
+
     //give etherscan time to see + track the transction
     await new Promise(function (resolve, reject) {
       setTimeout(function () {

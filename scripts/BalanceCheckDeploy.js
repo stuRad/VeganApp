@@ -1,13 +1,8 @@
 async function balanceDeploy() {
-
   const BalanceChecker = await ethers.getContractFactory("BalanceChecker");
   const balCheck = await BalanceChecker.deploy();
-
   await balCheck.deployed();
-
   console.log("contract deployed to: " + balCheck.address);
-
-//return contract Address
 }
 
 balanceDeploy()
